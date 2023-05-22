@@ -7,8 +7,8 @@ function Home() {
   return (
     <div className='min-h-screen'>
         <Slider />
-        <div className='max-w-[1400px] m-auto border-red-700 border my-10'>
-          <section>
+        <div className='max-w-full m-auto my-10'>
+          <section className='relative'>
             <ProductCarousel />
           </section>
         </div>
@@ -17,19 +17,19 @@ function Home() {
             <img src="./assets/Screenshot 2023-05-19 205442.png" alt="" className='w-full h-full'/>
           </div>
         </section>
-        <div className='max-w-[1400px] m-auto border-red-700 border my-10'>
-        <section>
-            <div className='flex flex-col place-content-center'>
-              <div className='text-center w-full font-bold text-2xl'>
-                <h1>New collection</h1>
+        <div className='max-w-full m-auto my-10'>
+          <section className='relative'>
+              <div className='flex flex-col place-content-center mb-10'>
+                <div className='text-center w-full font-bold text-2xl'>
+                  <h1>New collection</h1>
+                </div>
+                <div className='w-full flex place-content-center mt-5'>
+                  <button className='bg-button-color text-white py-3 px-5 mr-20'><Link to='/categories' relative="path">SHOP BY MEN</Link></button>
+                  <button className='bg-button-color text-white py-3 px-5'><Link to='/categories' relative="path">SHOP BY WOMEN</Link></button>
+                </div>
               </div>
-              <div className='w-full flex place-content-center mt-5'>
-                <button className='bg-button-color text-white py-3 px-5 mr-20'><Link to='/categories' relative="path">SHOP BY MEN</Link></button>
-                <button className='bg-button-color text-white py-3 px-5'><Link to='/categories' relative="path">SHOP BY WOMEN</Link></button>
-              </div>
-            </div>
-            <ProductCarousel />
-        </section>
+              <ProductCarousel />
+          </section>
         </div>
     </div>
   )
