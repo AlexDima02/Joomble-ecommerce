@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "variation_options",
+  "info": {
+    "singularName": "variation-option",
+    "pluralName": "variation-options",
+    "displayName": "VariationOption",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "option_name": {
+      "type": "string"
+    }
+  }
+}

@@ -1,15 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Slider from './components/ImageSlider/Slider';
 import ProductCarousel from './components/ProductCarousel/ProductCarousel';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
+import FetchData from '../../components/FetchComponent/FetchData';
+
+
 
 function Home() {
+  
+
+  const { error, data, fetchData } = FetchData();
+
+  useEffect(() => {
+
+    fetchData("/products?populate=*");
+
+  }, []);
+  const [products, setProducts] = useState([]);
+  console.log(data)
+
   return (
     <div className='min-h-screen'>
-        <Slider />
+        <section>
+          <Slider />
+        </section>
         <div className='max-w-full m-auto my-10'>
           <section className='relative'>
-            <ProductCarousel />
+            <div className='w-full text-center mb-5'>
+              <h1 className='font-bold text-2xl'>Our favourties</h1>
+            </div>
+            <ProductCarousel products={data}/>
           </section>
         </div>
         <section>

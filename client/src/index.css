@@ -16,10 +16,12 @@ body{
 
 }
 
+
+
 .slick-slide > div {
 
-    margin: 1rem 10px;
-    width: 90%;
+    margin: 1rem auto;
+    width: 50%;
 }
 
 .slick-list {
