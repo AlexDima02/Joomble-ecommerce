@@ -30,7 +30,7 @@ function CategoryPage() {
     <div className='min-h-screen mt-10'>
       <div className='max-w-[1400px] flex place-content-between border border-red-600 m-auto'>
           <div className='border border-red-700 w-1/2 mr-5'>
-            <CategoryOptions listOptions={dataListOptions} dataListTypes={dataListTypes} fetchDataProducts={fetchDataProducts}/>
+            <CategoryOptions listOptions={dataListOptions} dataListTypes={dataListTypes} dataListSizes={dataListSizes} fetchDataProducts={fetchDataProducts}/>
           </div>
           <div className='border border-red-700 w-full grid grid-cols-3 gap-10 grid-rows-3'>
             <ListOfItems products={dataProducts}/>

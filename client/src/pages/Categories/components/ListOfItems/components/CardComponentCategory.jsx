@@ -4,9 +4,22 @@ function CardComponentCategory({product}) {
 
     
     const urlApi = import.meta.env.VITE_UPLOAD_IMAGE_URL;
-  
+
+    const handleAddToCart = () => {
+        console.log('sa')
+        return (
+
+                <div className='bg-red-700'>
+                      Salut!  
+                </div>
+
+        )
+
+
+    }
+    // 'flex flex-col shadow-xl bg-white cursor-pointer transition-all place-content-between md:hover:scale-[120%]'
     return (
-        <div className='flex flex-col shadow-xl bg-white cursor-pointer transition-all place-content-between md:hover:scale-[120%]'>
+        <div className={`flex flex-col shadow-xl bg-white cursor-pointer transition-all place-content-between md:hover:scale-[120%] md:hover:${handleAddToCart()}`}>
                     <div className='w-full h-auto object-cover overflow-hidden'>
                             <img className='w-full h-72' src={urlApi + product.attributes.product_image1.data.attributes.url} alt="" />
                     </div>
