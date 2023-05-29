@@ -38,6 +38,9 @@
       "relation": "manyToMany",
       "target": "api::category.category",
       "inversedBy": "variations"
+    },
+    "value_color": {
+      "type": "string"
     }
   }
 }

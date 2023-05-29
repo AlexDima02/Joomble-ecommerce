@@ -11,14 +11,16 @@ function Home() {
   
 
   const { error, data, fetchData } = FetchData();
+  const { error1, data: newProducts, fetchData: fetchNewProducts } = FetchData();
 
   useEffect(() => {
 
     fetchData("/products?populate=*");
+    fetchNewProducts("/products?filter[variations][title][$eq]=New&populate=*")
 
   }, []);
   const [products, setProducts] = useState([]);
-  console.log(data)
+  console.log(newProducts)
 
   return (
     <div className='min-h-screen'>
@@ -49,7 +51,7 @@ function Home() {
                   <button className='bg-button-color text-white py-3 px-5'><Link to='/categories' relative="path">SHOP BY WOMEN</Link></button>
                 </div>
               </div>
-              <ProductCarousel />
+              <ProductCarousel products={newProducts}/>
           </section>
         </div>
     </div>

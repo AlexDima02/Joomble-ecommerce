@@ -13,7 +13,7 @@ function ListOfItems({products}) {
             return (
 
                     <div key={product.id}>
-                        <CardComponentCategory product={product}/>
+                        <CardComponentCategory id={product.id} product={product}/>
                     </div>
                 )  
             })}
