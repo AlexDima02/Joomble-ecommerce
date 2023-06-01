@@ -19,7 +19,7 @@ function FeaturedProduct() {
   console.log(data)
 
   return (
-    <div className='min-h-screen flex max-w-7xl place-content-between border border-red-600 m-auto'>
+    <div className='min-h-screen flex max-w-7xl place-content-between border border-red-600 m-auto bg-white'>
       <div className='flex flex-col w-1/2'>
           <div className='w-full h-1/2 object-contain overflow-hidden'><img className='w-full h-full' src={urlApi + data?.data.data.attributes.product_image1.data.attributes.url} alt="" /></div>
           <div className='w-1/2 h-[25%] object-cover overflow-hidden'><img className='w-full h-full' src={urlApi + data?.data.data.attributes.product_image2.data.attributes.url} alt="" /></div>

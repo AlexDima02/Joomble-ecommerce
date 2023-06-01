@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({setToggleCart, toggleCart}) {
   return (
     <div className='bg-primary-color flex place-content-between px-5 text-text-color py-2'>
         <div className='flex flex-col place-content-center'>
@@ -21,7 +21,7 @@ function Navbar() {
         <span><Link to='/' relative="path">Joomble</Link></span>
       </div>
       <div className='flex flex-col place-content-center'>
-        <div className='flex flex-col place-content-center'>
+        <div className='flex flex-col place-content-center cursor-pointer transition-all' onClick={() => setToggleCart(!toggleCart)}>
             Cart
         </div>
       </div>

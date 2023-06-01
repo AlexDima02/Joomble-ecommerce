@@ -27,8 +27,8 @@ function CategoryPage() {
   }, [])
 
   return (
-    <div className='min-h-screen mt-10'>
-      <div className='max-w-[1400px] flex place-content-between border border-red-600 m-auto'>
+    <div className='min-h-screen pt-10 bg-white'>
+      <div className='max-w-[1400px] flex place-content-between border border-red-600 m-auto bg-white'>
           <div className='border border-red-700 w-1/2 mr-5'>
             <CategoryOptions listOptions={dataListOptions} dataListTypes={dataListTypes} dataListSizes={dataListSizes} fetchDataProducts={fetchDataProducts}/>
           </div>

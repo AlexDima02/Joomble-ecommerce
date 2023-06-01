@@ -4,7 +4,7 @@ import FetchData from '../../../../components/FetchComponent/FetchData.jsx'
 
 function ListOfItems({products}) {
     
-   
+    
     return (
 
         <>

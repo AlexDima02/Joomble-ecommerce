@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { addToCart, calculateTotalAmount } from '../../../../../components/ShoppingCart/components/CounterSlice';
 
 function CardComponentCategory({product, id}) {
+
+    const dispatch = useDispatch();
 
     const [active, setActive] = useState(false)
     const urlApi = import.meta.env.VITE_UPLOAD_IMAGE_URL;
@@ -40,7 +43,7 @@ function CardComponentCategory({product, id}) {
                     </div>
                     <div className={`bg-button-color text-white text-center mt-5 py-3 flex flex-col place-content-center absolute w-full transition-all ${active ? '-bottom-10 z-0' : 'bottom-0 -z-10'}`}>
                         <div>   
-                                <span onClick={(e) => console.log(e.currentTarget)}>BUY NOW!</span>                  
+                                <span onClick={() => {dispatch(addToCart(product))}}>BUY NOW!</span>                  
                         </div>
                     </div>
         </div>
