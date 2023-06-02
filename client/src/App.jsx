@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import FeaturedProduct from './pages/FeaturedProduct/FeaturedProduct';
 import CategoryPage from './pages/Categories/CategoryPage';
@@ -11,6 +11,17 @@ import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 function App() {
   
   const [toggleCart, setToggleCart] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get('success')) {
+      navigate('/')
+    }
+
+  }, []);
 
   return (
     <>

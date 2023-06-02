@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { counterManager, increment, addToCart, decrement, removeFromCart, calculateTotalAmount } from './components/CounterSlice';
-
+import { counterManager, increment, addToCart, decrement, removeFromCart, calculateTotalAmount, addToCartFromProductPage } from './components/CounterSlice';
+import { loadStripe } from "@stripe/stripe-js";
+import makeRequests from '../FetchComponent/makeRequests'
 
 function ShoppingCart({toggleCart, setToggleCart}) {
 
+    
+    const stripePromise = loadStripe("pk_test_51NETJdDbopdISZkbfTNvk0uROngSCayFLjDeqsEET81LUg5OqJ1CunZs0PGI3oQsoC0Od3FOr1288ReLaGazkFOm00r2b4jYUv");
     const counter = useSelector(counterManager);
     const dispatch = useDispatch();
+    const products = counter.countProducts;
     console.log(counter);
     const urlApi = import.meta.env.VITE_UPLOAD_IMAGE_URL;
     
@@ -29,7 +33,23 @@ function ShoppingCart({toggleCart, setToggleCart}) {
         return count
     }
 
+    const handlePayment = async () => {
+        try {
+
+          const stripe = await stripePromise;
+          
+          const res = await makeRequests.post("/orders", {
+            products
+          });
+          console.log(res.data)
+          await stripe.redirectToCheckout({
+            sessionId: res.data.stripeSession.id,
+          });
     
+        } catch (err) {
+          console.log(err);
+        }
+    };
     
   return (
     
@@ -48,11 +68,11 @@ function ShoppingCart({toggleCart, setToggleCart}) {
         <div className='mx-5 py-5'>
             
 
-            {counter.countProducts?.map((products) => (
+            {counter?.countProducts?.map((products) => (
 
                     <div className='flex border-b-gray-400 border-b mb-10'>
                         <div className='flex w-1/2'>
-                            <div className='object-cover overflow-hidden w-36 h-36'><img src={urlApi + products.attributes.product_image1.data.attributes.url} alt=""  className='w-full h-full'/></div>
+                            <div className='object-cover overflow-hidden w-36 h-36'><img src={urlApi + products?.attributes.product_image1.data.attributes.url} alt=""  className='w-full h-full'/></div>
                         </div>
                         <div className='flex flex-col w-full'>
                             <div className='flex w-full place-content-between'>
@@ -105,7 +125,7 @@ function ShoppingCart({toggleCart, setToggleCart}) {
                     <span>FREE</span>
                 </div>
                 <div>
-                    <button className='w-full bg-button-color py-3 my-5 font-bold text-white'>PROCEED TO CHECKOUT</button>
+                    <button className='w-full bg-button-color py-3 my-5 font-bold text-white' onClick={handlePayment}>PROCEED TO CHECKOUT</button>
                 </div>
             </div>
         </div>

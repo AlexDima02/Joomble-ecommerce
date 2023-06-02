@@ -13,6 +13,7 @@ export const counterSlice = createSlice({
     reducers: {
         addToCart(state, action){
             
+            console.log(action.payload)
             const checkIndex = state.countProducts.findIndex((item) => item.id === action.payload.id);
             
             if(checkIndex >= 0){
@@ -25,8 +26,24 @@ export const counterSlice = createSlice({
                 state.countProducts.push(newProduct);
 
             }
-            
 
+        },
+
+        addToCartFromProductPage(state, action){
+
+            const checkIndex = state.countProducts.findIndex((item) => item.id === action.payload.id);
+
+            if(checkIndex >= 0){
+
+                state.countProducts[checkIndex].quantity += action.payload.quantity;
+               
+            }else{
+
+                const newProduct = {...action.payload, quantity: action.payload.quantity, subTotal: 0};
+                state.countProducts.push(newProduct);
+
+            }
+            
         },
 
         removeFromCart(state, action){
@@ -82,7 +99,7 @@ export const counterSlice = createSlice({
     }
 })
 
-export const { addToCart, increment, decrement, calculateTotalAmount, removeFromCart } = counterSlice.actions;
+export const { addToCart, increment, decrement, calculateTotalAmount, removeFromCart, addToCartFromProductPage } = counterSlice.actions;
 export const counterManager = state => state.counter;
 
 export default counterSlice.reducer

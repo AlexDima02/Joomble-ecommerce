@@ -1,22 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import FetchData from '../../components/FetchComponent/FetchData';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCartFromProductPage } from '../../components/ShoppingCart/components/CounterSlice';
 
 function FeaturedProduct() {
 
   const urlApi = import.meta.env.VITE_UPLOAD_IMAGE_URL;
   const params = useParams().id;
+  const dispatch = useDispatch();
+  const [productAndQuantity, setProductAndQuantity] = useState(null);
+  console.log(productAndQuantity)
   console.log(params)
   const {error, data, fetchData} = FetchData()
   const colors = data?.data.data.attributes.variations.data?.filter((item) => item.attributes.title === 'color');
   console.log(colors?.map((color) => color.attributes.value_color))
+  
   useEffect(() => {
 
     fetchData(`/products/${params}?populate=*`)
 
   }, [])
 
-  console.log(data)
+  const product = data?.data.data;
 
   return (
     <div className='min-h-screen flex max-w-7xl place-content-between border border-red-600 m-auto bg-white'>
@@ -52,7 +58,7 @@ function FeaturedProduct() {
           </div>
         </div>
         <div className='flex mt-5'>
-          <select name="" id="" className='bg-gray-200 text-gray-500 outline-none w-20'>
+          <select name="" id={params} className='bg-gray-200 text-gray-500 outline-none w-20' onChange={(e) => setProductAndQuantity({...product, quantity: parseInt(e.target.value)})}>
               <option value="1" className='text-black'>1</option>
               <option value="2" className='text-black'>2</option>
               <option value="3" className='text-black'>3</option>
@@ -65,7 +71,7 @@ function FeaturedProduct() {
               <option value="10" className='text-black'>10</option>
           </select>
           
-          <button className='bg-button-color text-white py-2 w-64 ml-3'>ADD TO CART</button>
+          <button className='bg-button-color text-white py-2 w-64 ml-3' onClick={() =>  dispatch(addToCartFromProductPage(productAndQuantity))}>ADD TO CART</button>
           
         </div>
       </div>
