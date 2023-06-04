@@ -37,7 +37,7 @@ function Home() {
         </div>
         <section>
           <div className='w-full h-full object-cover overflow-hidden'>
-            <img src="./public/img/Screenshot 2023-05-19 205442.png" alt="" className='w-full h-full'/>
+            <img src="img/Screenshot 2023-05-19 205442.png" alt="" className='w-full h-full'/>
           </div>
         </section>
         <div className='max-w-full m-auto my-10'>
