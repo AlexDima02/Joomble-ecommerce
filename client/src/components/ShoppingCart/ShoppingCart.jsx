@@ -72,7 +72,7 @@ function ShoppingCart({toggleCart, setToggleCart}) {
 
                     <div className='flex border-b-gray-400 border-b mb-10'>
                         <div className='flex w-1/2'>
-                            <div className='object-cover overflow-hidden w-36 h-36'><img src={urlApi + products?.attributes.product_image1.data.attributes.url} alt=""  className='w-full h-full'/></div>
+                            <div className='object-cover overflow-hidden w-36 h-36'><img src={products?.attributes.product_image1.data.attributes.url} alt=""  className='w-full h-full'/></div>
                         </div>
                         <div className='flex flex-col w-full'>
                             <div className='flex w-full place-content-between'>

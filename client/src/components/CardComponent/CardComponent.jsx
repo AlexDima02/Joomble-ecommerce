@@ -7,7 +7,7 @@ function CardComponent({product}) {
         <>
             <div className='flex flex-col shadow-xl bg-white cursor-pointer transition-all place-content-between md:hover:scale-[120%] md:m-16'>
                     <div className='w-full h-auto object-cover overflow-hidden'>
-                            <img className='w-full h-72' src={urlApi + product.attributes.product_image1.data.attributes.url} alt="" />
+                            <img className='w-full h-72' src={product.attributes.product_image1.data.attributes.url} alt="" />
                     </div>
                     <div className='px-4 my-3'>
                             <h2>{product.attributes.name}</h2>

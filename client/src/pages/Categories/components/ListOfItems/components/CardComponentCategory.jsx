@@ -30,7 +30,7 @@ function CardComponentCategory({product, id}) {
         <div className='relative flex flex-col shadow-xl cursor-pointer transition-all place-content-between md:hover:scale-[120%]' onMouseEnter={(e) => handleAddToCart(e)} onMouseLeave={() => setActive(false)}>
                     <div id={id} className='bg-white' onClick={(e) => handleLinkTo(e)}>
                         <div className='w-full h-auto object-cover overflow-hidden'>
-                                <img className='w-full h-72' src={urlApi + product.attributes.product_image1.data.attributes.url} alt="" />
+                                <img className='w-full h-72' src={product.attributes.product_image1.data.attributes.url} alt="" />
                         </div>
                         <div className='px-4 my-3'>
                                 <h2>{product.attributes.name}</h2>
