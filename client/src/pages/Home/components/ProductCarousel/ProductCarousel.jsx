@@ -47,11 +47,11 @@ function ProductCarousel({products}) {
      
   return (
     <div className='mb-10 w-full'>
-        <div className='absolute top-[50%] left-0 z-50 p-2 bg-button-color rounded-md text-white'>
-            <button onClick={() => slider?.current?.slickPrev()}><i class="fa-sharp fa-solid fa-arrow-left"></i></button>
-        </div>
-         <Slider className='relative' ref={slider} {...settings}>
-                    {products?.data.data?.map((product) => {
+                <div className='absolute top-[50%] left-0 z-50 p-2 bg-button-color rounded-md text-white'>
+                    <button onClick={() => slider?.current?.slickPrev()}><i class="fa-sharp fa-solid fa-arrow-left"></i></button>
+                </div>
+                <Slider className='relative' ref={slider} {...settings}>
+                    {products?.map((product) => {
                         return (
                             <CardComponent product={product}/>
                         )

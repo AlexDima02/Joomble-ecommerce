@@ -38,3 +38,12 @@ function App() {
 }
 
 export default App
+
+
+// Endpoint 1 --> iteme filtrate1
+// Endpoint 2 --> iteme filtrate2
+
+// ... tot asa pana la 5 endpint-uri chemate la click
+// Trebuie verificat daca acel state contine itemele pe care vrem sa le introducem, daca exista deja sterge acel item din array
+// Fiecare raspuns de la endpoint va fi trimis catre un array care tine loc de state
+// si care ne a afisa produsele

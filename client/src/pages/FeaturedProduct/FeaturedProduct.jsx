@@ -5,41 +5,42 @@ import { useDispatch } from 'react-redux';
 import { addToCartFromProductPage } from '../../components/ShoppingCart/components/CounterSlice';
 
 function FeaturedProduct() {
-
+  
+  const {error, data, fetchData} = FetchData()
+  console.log(data)
+  const [productAndQuantity, setProductAndQuantity] = useState(null);
   const urlApi = import.meta.env.VITE_UPLOAD_IMAGE_URL;
   const params = useParams().id;
   const dispatch = useDispatch();
-  const [productAndQuantity, setProductAndQuantity] = useState(null);
+  const colors = data?.attributes?.variations.data?.filter((item) => item.attributes.title === 'color');
   console.log(productAndQuantity)
   console.log(params)
-  const {error, data, fetchData} = FetchData()
-  const colors = data?.data.data.attributes.variations.data?.filter((item) => item.attributes.title === 'color');
   console.log(colors?.map((color) => color.attributes.value_color))
   
   useEffect(() => {
 
-    fetchData(`/products/${params}?populate=*`)
+    fetchData(`/products/${params}?populate=*`).then((res) => console.log(res))
 
   }, [])
 
-  const product = data?.data.data;
+  const product = data;
 
   return (
     <div className='min-h-screen flex max-w-7xl place-content-between border border-red-600 m-auto bg-white'>
-      <div className='flex flex-col w-1/2'>
-          <div className='w-full h-1/2 object-contain overflow-hidden'><img className='w-full h-full' src={data?.data.data.attributes.product_image1.data.attributes.url} alt="" /></div>
-          <div className='w-1/2 h-[25%] object-cover overflow-hidden'><img className='w-full h-full' src={data?.data.data.attributes.product_image2.data.attributes.url} alt="" /></div>
+      {/* <div className='flex flex-col w-1/2'>
+          <div className='w-full h-1/2 object-contain overflow-hidden'><img className='w-full h-full' src={data?.data.attributes?.product_image1?.data?.attributes?.url ?? ''} alt="" /></div>
+          <div className='w-1/2 h-[25%] object-cover overflow-hidden'><img className='w-full h-full' src={data?.data.attributes?.product_image2?.data?.attributes?.url ?? ''} alt="" /></div>
       </div>
       <div className='flex flex-col ml-5 w-1/2 border border-red-700 '>
         <div className='text-3xl'>
-          <h1>{data?.data.data.attributes.name}</h1>
+          <h1>{data?.data.attributes.name}</h1>
         </div>
         <div className='text-xl mt-5'>
-          <p>{data?.data.data.attributes.description}</p>
+          <p>{data?.data.attributes.description}</p>
         </div>
         <div className='text-xl mt-5 flex'>
-          <p className='mr-5'>{data?.data.data.attributes.price}$</p>
-          <p className='line-through'>{data?.data.data.attributes.oldPrice}$</p>
+          <p className='mr-5'>{data?.data.attributes.price}$</p>
+          <p className='line-through'>{data?.data.attributes.oldPrice}$</p>
         </div>
         <div className='text-lg mt-5'>
           <p>Colors:</p>
@@ -74,7 +75,7 @@ function FeaturedProduct() {
           <button className='bg-button-color text-white py-2 w-64 ml-3' onClick={() =>  dispatch(addToCartFromProductPage(productAndQuantity))}>ADD TO CART</button>
           
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

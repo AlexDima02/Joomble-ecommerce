@@ -4,21 +4,21 @@ import FetchData from '../../../../components/FetchComponent/FetchData.jsx'
 
 function ListOfItems({products}) {
     
-    
+    console.log(products)
     return (
 
-        <>
-        {products?.data.data?.map((product) => { 
+        <div className='grid grid-flow-row grid-cols-1  grid-rows-6'>
+            {products?.map((product) => { 
 
-            return (
+                return (
 
-                    <div key={product.id}>
-                        <CardComponentCategory id={product.id} product={product}/>
-                    </div>
-                )  
+                        <div key={product.id} className='w-full'>
+                            <CardComponentCategory id={product.id} product={product}/>
+                        </div>
+                )
+
             })}
-
-        </>
+        </div>
         
     )
 }

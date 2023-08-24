@@ -4,10 +4,9 @@ import makeRequests from './makeRequests';
 
 function FetchData(query) {
 
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [error, setError] = useState();
   const apiKey = import.meta.env.VITE_API_TOKEN;
-  
 
   // useEffect(() => {
 
@@ -21,9 +20,9 @@ function FetchData(query) {
     try{
 
       const data = await makeRequests.get(query);
-
-      setData(data);
-
+      setData([...data.data['data']]);
+      return data.data['data'];
+      
     }catch(e){
 
       console.log(e)
