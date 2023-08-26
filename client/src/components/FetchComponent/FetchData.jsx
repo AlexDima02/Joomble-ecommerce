@@ -6,6 +6,7 @@ function FetchData(query) {
 
   const [data, setData] = useState([]);
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
   const apiKey = import.meta.env.VITE_API_TOKEN;
 
   // useEffect(() => {
@@ -17,9 +18,11 @@ function FetchData(query) {
 
   const fetchData = async (query) => {
     console.log(query)
+    setLoading(false)
     try{
 
       const data = await makeRequests.get(query);
+      setLoading(true)
       setData([...data.data['data']]);
       return data.data['data'];
       
@@ -32,7 +35,7 @@ function FetchData(query) {
   }
 
 
-  return {error, data, fetchData}
+  return {error, data, loading, fetchData}
 
 }
 

@@ -3,6 +3,7 @@ import CategoryOptions from './components/CategoryOptions/CategoryOptions';
 import ListOfItems from './components/ListOfItems/ListOfItems';
 import FetchData from '../../components/FetchComponent/FetchData';
 import { useParams } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 function CategoryPage() {
 
@@ -22,10 +23,10 @@ function CategoryPage() {
   const {error: error2, data: dataSizesOptions, fetchData: fetchDataSizesOptions} = FetchData();
   const {error: error3, data: dataColorOptions, fetchData: fetchDataColorOptions} = FetchData();
   const {error: error4, data: dataCollectionOptions, fetchData: fetchDataCollectionOptions} = FetchData();
-  const {error: error5, data: dataInitialProductList, fetchData: fetchProductList} = FetchData();
+  const {error: error5, data: dataInitialProductList, loading, fetchData: fetchProductList} = FetchData();
   
   console.log(productList)
-
+  console.log(loading)
   
   useEffect(() => {
 
@@ -41,23 +42,31 @@ function CategoryPage() {
         ${color.map((item) => `&[filters][variations][id][$eq]=${item}`).join('')}
         ${collection.map((item) => `&[filters][variations][value][$eq]=${item}`).join('')}
         `).then((res) => setProductList(res))
-      
 
   }, [gender, type, size, color, collection])
 
   return (
-    <div className='min-h-screen pt-10 bg-white'>
-      <div className='relative max-w-[1400px] flex place-content-between border border-red-600 m-auto bg-white'>
-          <div className='border border-red-700 w-1/2 px-5 mr-5 hidden md:block h-fit'>
-            <CategoryOptions typeArr={type} sizeArr={size} colorArr={color} collectionArr={collection} genderArr={gender} setType={setType} setSize={setSize} setColor={setColor} setCollection={setCollection} setGender={setGender} gender={dataGenderOptions} types={dataTypeOptions} sizes={dataSizesOptions} colors={dataColorOptions} collection={dataCollectionOptions}/>
-          </div>
-          <div className='border border-red-700 px-5 w-full grid grid-cols-3 gap-10 grid-rows-4 h-fit'>
-            <ListOfItems products={productList}/>
-          </div>
-          <div className='absolute bottom-0 w-full flex place-content-end mx-3'>
-              <button className='rounded-3xl px-10 py-4 bg-red-50'>Filter</button>
-          </div>
+    <div className='min-h-screen bg-white'>
+      
+      {!loading ? 
+      <div className='h-screen w-full flex bg-gray-400 opacity-70 place-content-center'>
+        <div className='w-1/2 m-auto flex place-content-center'>
+          <CircularProgress color="success" /> 
+        </div>
       </div>
+      : 
+        <div className='relative max-w-[1400px] flex pt-10 place-content-between border border-red-600 m-auto bg-white'>
+            <div className='border border-red-700 w-1/2 px-5 mr-5 hidden md:block h-fit'>
+              <CategoryOptions typeArr={type} sizeArr={size} colorArr={color} collectionArr={collection} genderArr={gender} setType={setType} setSize={setSize} setColor={setColor} setCollection={setCollection} setGender={setGender} gender={dataGenderOptions} types={dataTypeOptions} sizes={dataSizesOptions} colors={dataColorOptions} collection={dataCollectionOptions}/>
+            </div>
+            <div className='border border-red-700 px-5 w-full grid grid-cols-3 gap-10 grid-rows-4 h-fit'>
+              <ListOfItems products={productList}/>
+            </div>
+            <div className='absolute bottom-0 w-full flex place-content-end mx-3'>
+                <button className='rounded-3xl px-10 py-4 bg-red-50'>Filter</button>
+            </div>
+        </div>
+      }
     </div>
   )
 }
