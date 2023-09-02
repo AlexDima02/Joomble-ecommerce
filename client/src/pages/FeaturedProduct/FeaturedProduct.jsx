@@ -40,18 +40,18 @@ function FeaturedProduct() {
           </div>
         </div>
       :
-      <div className='min-h-screen sm:flex max-w-7xl place-content-between justify-center border border-red-600 m-auto bg-white md:flex'>
+      <div className='min-h-screen sm:flex max-w-7xl place-content-between justify-center m-auto mt-10 bg-white md:flex'>
         <div className='w-full hidden md:flex'>
-          <div className='border border-red-400 flex-col place-content-between'>
-            <div id={product?.attributes?.product_image1?.data?.attributes?.url} onClick={(e) => setImage(e.target.id)} className='cursor-pointer w-[100px] h-[100px] object-contain overflow-hidden mb-5 border border-red-400'><img className='pointer-events-none w-full h-full' src={product?.attributes?.product_image1?.data?.attributes?.url ?? ''} alt="" /></div>
-            <div id={product?.attributes?.product_image2?.data?.attributes?.url} onClick={(e) => setImage(e.target.id)} className='cursor-pointer w-[100px] h-[100px] object-contain overflow-hidden border border-red-400'><img className='pointer-events-none w-full h-full' src={product?.attributes?.product_image2?.data?.attributes?.url ?? ''} alt="" /></div>
+          <div className=' flex-col place-content-between'>
+            <div id={product?.attributes?.product_image1?.data?.attributes?.url} onClick={(e) => setImage(e.target.id)} className='cursor-pointer w-[100px] h-[100px] object-contain overflow-hidden mb-5 border  border-gray-300'><img className='pointer-events-none w-full h-full' src={product?.attributes?.product_image1?.data?.attributes?.url ?? ''} alt="" /></div>
+            <div id={product?.attributes?.product_image2?.data?.attributes?.url} onClick={(e) => setImage(e.target.id)} className='cursor-pointer w-[100px] h-[100px] object-contain overflow-hidden border  border-gray-300'><img className='pointer-events-none w-full h-full' src={product?.attributes?.product_image2?.data?.attributes?.url ?? ''} alt="" /></div>
           </div>
-          <div className='w-full h-full border border-red-400 ml-3'>
-            <div className='w-full h-1/2 object-cover overflow-hidden border border-red-400'><img className='w-full h-full' src={selectedImage ? selectedImage : product?.attributes?.product_image1?.data?.attributes?.url} alt="" /></div>
+          <div className='w-full h-full ml-3'>
+            <div className='w-full h-1/2 object-cover overflow-hidden border  border-gray-300'><img className='w-full h-full' src={selectedImage ? selectedImage : product?.attributes?.product_image1?.data?.attributes?.url} alt="" /></div>
           </div>
         </div>
         <ImageCarousel product={product}/>
-        <div className='flex flex-col p-5 w-full border border-red-700 md:ml-5 md:w-1/2'>
+        <div className='flex flex-col p-5 w-full md:ml-5 md:w-1/2'>
           <div className='text-3xl'>
             <h1>{product?.attributes.name}</h1>
           </div>
@@ -60,7 +60,7 @@ function FeaturedProduct() {
           </div>
           <div className='text-xl mt-5 flex'>
             <p className='mr-5'>{product?.attributes.price}$</p>
-            <p className='line-through'>{product?.attributes.oldPrice}$</p>
+            <p className={`line-through ${product?.attributes.oldPrice > 0 ? 'block' : 'hidden'}`}>{product?.attributes.oldPrice}$</p>
           </div>
           <div className='text-lg mt-5'>
             <p>Colors:</p>

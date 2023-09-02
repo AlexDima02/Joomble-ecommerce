@@ -24,7 +24,7 @@ function CardComponent({infoProduct, id}) {
                     </div>
                     <div className='flex place-content-between px-4 mb-3'>
                             <p>{infoProduct.attributes.price}$</p>
-                            <span className='line-through'>{infoProduct.attributes.oldPrice}$</span>
+                            <span className={`line-through ${infoProduct.attributes.oldPrice > 0 ? 'block' : 'hidden'}`}>{infoProduct.attributes.oldPrice}$</span>
                     </div>
                 </div>
         </>

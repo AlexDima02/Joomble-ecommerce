@@ -65,7 +65,7 @@ function CategoryPage({setToggleFilter, toggleFilter, urlGender, urlCollection})
         </div>
       </div>
       : 
-        <div className='overflow-y-hidden overflow-x-hidden relative max-w-[1500px] pt-0 flex place-content-between m-auto bg-white md:pt-10'>
+        <div className='overflow-y-hidden overflow-x-hidden relative max-w-[1500px] pt-0 flex place-content-between m-auto bg-white mt-10 md:mt-0 md:pt-10'>
             <div className=' w-1/3 px-5 mr-5 hidden md:block h-fit'>
               <CategoryOptions setToggleFilter={setToggleFilter} toggleFilter={toggleFilter} typeArr={type} sizeArr={size} colorArr={color} collectionArr={collection} genderArr={gender} setType={setType} setSize={setSize} setColor={setColor} setCollection={setCollection} setGender={setGender} gender={dataGenderOptions} types={dataTypeOptions} sizes={dataSizesOptions} colors={dataColorOptions} collection={dataCollectionOptions}/>
             </div>

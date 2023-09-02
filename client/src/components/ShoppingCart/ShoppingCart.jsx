@@ -30,7 +30,7 @@ function ShoppingCart({toggleCart, setToggleCart}) {
 
         })
 
-        return count
+        return count.toFixed(2)
     }
 
     const handlePayment = async () => {
@@ -98,7 +98,7 @@ function ShoppingCart({toggleCart, setToggleCart}) {
                                     <span id={products.id} className='cursor-pointer px-5 hover:bg-gray-400' onClick={(e) => dispatch(increment(e.target.id))}>+</span>
                                 </div>
                                 <div>
-                                    <span className='mr-5'>{products.attributes.price * products.quantity}$</span>
+                                    <span className='mr-5'>{(products.attributes.price * products.quantity).toFixed(2)}$</span>
                                     <span className='line-through'>{products.attributes.oldPrice}$</span>
                                 </div>
                             </div>
