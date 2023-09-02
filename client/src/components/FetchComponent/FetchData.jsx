@@ -23,7 +23,7 @@ function FetchData(query) {
 
       const data = await makeRequests.get(query);
       setLoading(true)
-      setData([...data.data['data']]);
+      setData(Array.isArray(data.data['data']) ? [...data.data['data']] : [data.data['data']]);
       return data.data['data'];
       
     }catch(e){

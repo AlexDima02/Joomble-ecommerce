@@ -1,20 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
-import CardComponent from '../../../../components/CardComponent/CardComponent';
-// import './carousel.css';
+import React, { useRef } from 'react'
+import Slider from 'react-slick';
 
-
-function ProductCarousel({products}) {
-
+function ImageCarousel({product}) {
     
-    const urlApi = import.meta.env.VITE_UPLOAD_IMAGE_URL;
     const slider = useRef(null);
+    const productImg1 = product?.attributes?.product_image1?.data?.attributes?.url;
+    const productImg2 = product?.attributes?.product_image2?.data?.attributes?.url;
     const settings = {
       infinite: true,
       speed: 500,
-      slidesToShow: 2,
+      slidesToShow: 1,
       slidesToScroll: 1,
       initialSlide: 0,
       responsive: [
@@ -46,18 +41,19 @@ function ProductCarousel({products}) {
  
      
   return (
-    <div className='mb-10 w-full'>
-                <div className='absolute top-[50%] left-0 z-50 p-2 bg-button-color rounded-md text-white'>
+    <div className='relative block w-full md:hidden'>
+                <div className='absolute top-[50%] translate-y-[-50%] left-0 p-2 bg-button-color z-50 rounded-md text-white'>
                     <button onClick={() => slider?.current?.slickPrev()}><i class="fa-sharp fa-solid fa-arrow-left"></i></button>
                 </div>
                 <Slider className='relative' ref={slider} {...settings}>
-                    {products?.map((product) => {
-                        return (
-                            <CardComponent id={product.id} infoProduct={product}/>
-                        )
-                    })}
+                    <div className='w-full h-[500px]'>
+                        <img className='w-full h-full' src={productImg1 ?? ''} alt="" />
+                    </div>
+                    <div className='w-[500px] h-[500px]'>
+                        <img className='w-full h-full' src={productImg2 ?? ''} alt="" />
+                    </div>
                 </Slider>
-                <div className='absolute top-[50%] right-0 z-50 bg-button-color p-2 rounded-md text-white'>
+                <div className='absolute top-[50%] translate-y-[-50%] right-0 bg-button-color p-2 rounded-md text-white'>
                         <button onClick={() => slider?.current?.slickNext()}><i class="fa-sharp fa-solid fa-arrow-right"></i></button>
                 </div>
                 
@@ -65,5 +61,4 @@ function ProductCarousel({products}) {
   )
 }
 
-
-export default ProductCarousel;
+export default ImageCarousel;

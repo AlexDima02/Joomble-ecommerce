@@ -4,14 +4,16 @@ import ListOfItems from './components/ListOfItems/ListOfItems';
 import FetchData from '../../components/FetchComponent/FetchData';
 import { useParams } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
+import FilterModal from '../../components/FilterPopUp/FilterModal';
 
-function CategoryPage() {
-
-  const [gender, setGender] = useState([])
+function CategoryPage({setToggleFilter, toggleFilter, urlGender, urlCollection}) {
+  
+  console.log(urlGender)
+  const [gender, setGender] = useState([...urlGender])
   const [type, setType] = useState([])
   const [size, setSize] = useState([])
   const [color, setColor] = useState([])
-  const [collection, setCollection] = useState([])
+  const [collection, setCollection] = useState([...urlCollection])
   const [productList, setProductList] = useState([])
   console.log(gender)
   console.log(type)
@@ -25,8 +27,16 @@ function CategoryPage() {
   const {error: error4, data: dataCollectionOptions, fetchData: fetchDataCollectionOptions} = FetchData();
   const {error: error5, data: dataInitialProductList, loading, fetchData: fetchProductList} = FetchData();
   
-  console.log(productList)
+  console.log(toggleFilter)
   console.log(loading)
+
+  const handleOpenModal = () => {
+
+    setToggleFilter(!toggleFilter);
+    document.body.style.overflow = 'hidden';
+
+  }
+
   
   useEffect(() => {
 
@@ -43,10 +53,10 @@ function CategoryPage() {
         ${collection.map((item) => `&[filters][variations][value][$eq]=${item}`).join('')}
         `).then((res) => setProductList(res))
 
-  }, [gender, type, size, color, collection])
+  }, [gender, type, size, color, collection, urlGender, urlCollection])
 
   return (
-    <div className='min-h-screen bg-white'>
+    <div className='min-h-screen relative bg-white'>
       
       {!loading ? 
       <div className='h-screen w-full flex bg-gray-400 opacity-70 place-content-center'>
@@ -55,18 +65,19 @@ function CategoryPage() {
         </div>
       </div>
       : 
-        <div className='relative max-w-[1400px] flex pt-10 place-content-between border border-red-600 m-auto bg-white'>
-            <div className='border border-red-700 w-1/2 px-5 mr-5 hidden md:block h-fit'>
-              <CategoryOptions typeArr={type} sizeArr={size} colorArr={color} collectionArr={collection} genderArr={gender} setType={setType} setSize={setSize} setColor={setColor} setCollection={setCollection} setGender={setGender} gender={dataGenderOptions} types={dataTypeOptions} sizes={dataSizesOptions} colors={dataColorOptions} collection={dataCollectionOptions}/>
+        <div className='overflow-y-hidden overflow-x-hidden relative max-w-[1500px] pt-0 flex place-content-between m-auto bg-white md:pt-10'>
+            <div className=' w-1/3 px-5 mr-5 hidden md:block h-fit'>
+              <CategoryOptions setToggleFilter={setToggleFilter} toggleFilter={toggleFilter} typeArr={type} sizeArr={size} colorArr={color} collectionArr={collection} genderArr={gender} setType={setType} setSize={setSize} setColor={setColor} setCollection={setCollection} setGender={setGender} gender={dataGenderOptions} types={dataTypeOptions} sizes={dataSizesOptions} colors={dataColorOptions} collection={dataCollectionOptions}/>
             </div>
-            <div className='border border-red-700 px-5 w-full grid grid-cols-3 gap-10 grid-rows-4 h-fit'>
+            <div className=' px-5 w-full h-fit mb-24'>
               <ListOfItems products={productList}/>
             </div>
-            <div className='absolute bottom-0 w-full flex place-content-end mx-3'>
-                <button className='rounded-3xl px-10 py-4 bg-red-50'>Filter</button>
+            <div className='fixed right-0 bottom-10 w-fit h-fit flex place-content-end mx-3 md:hidden'>
+                <button className='rounded-3xl px-10 py-4 bg-button-color text-white' onClick={() => handleOpenModal()} >Filter</button>
             </div>
         </div>
       }
+      <FilterModal setToggleFilter={setToggleFilter} toggleFilter={toggleFilter} typeArr={type} sizeArr={size} colorArr={color} collectionArr={collection} genderArr={gender} setType={setType} setSize={setSize} setColor={setColor} setCollection={setCollection} setGender={setGender} gender={dataGenderOptions} types={dataTypeOptions} sizes={dataSizesOptions} colors={dataColorOptions} collection={dataCollectionOptions}/>
     </div>
   )
 }

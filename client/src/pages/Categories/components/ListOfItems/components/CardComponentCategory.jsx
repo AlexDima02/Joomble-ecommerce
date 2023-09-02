@@ -41,7 +41,7 @@ function CardComponentCategory({product, id}) {
                                 <span className='line-through'>{product.attributes.oldPrice}$</span>
                         </div>
                     </div>
-                    <div className={`bg-button-color text-white text-center mt-5 py-3 flex flex-col place-content-center absolute w-full transition-all ${active ? '-bottom-10 z-0' : 'bottom-0 -z-10'}`}>
+                    <div className={`bg-button-color  text-white text-center mt-5 py-3 flex-col place-content-center absolute w-full transition-all md:flex ${active ? '-bottom-10 z-0' : 'bottom-0 -z-10'}`}>
                         <div>   
                                 <span onClick={() => {dispatch(addToCart(product))}}>BUY NOW!</span>                  
                         </div>

@@ -1,14 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+import React, { useRef } from 'react'
+import Slider from 'react-slick';
 import CardComponent from '../../../../components/CardComponent/CardComponent';
-// import './carousel.css';
 
-
-function ProductCarousel({products}) {
-
-    
+function ProductCarouselNew({products}) {
     const urlApi = import.meta.env.VITE_UPLOAD_IMAGE_URL;
     const slider = useRef(null);
     const settings = {
@@ -65,5 +59,4 @@ function ProductCarousel({products}) {
   )
 }
 
-
-export default ProductCarousel;
+export default ProductCarouselNew;

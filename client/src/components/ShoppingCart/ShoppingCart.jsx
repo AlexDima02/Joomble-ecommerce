@@ -53,7 +53,7 @@ function ShoppingCart({toggleCart, setToggleCart}) {
     
   return (
     
-    <div className={`${toggleCart ? 'top-16 right-0 z-10' : '-z-20 top-0 right-0 opacity-0'} w-1/2 flex place-content-end absolute bg-white transition-all`}>
+    <div className={`${toggleCart ? 'top-16 right-0 z-10' : '-z-20 top-0 right-0 opacity-0'} w-full flex place-content-end absolute bg-white transition-all md:w-1/3`}>
       
       <div className='w-full'>
         <div className='bg-primary-color flex place-content-between px-5'>
